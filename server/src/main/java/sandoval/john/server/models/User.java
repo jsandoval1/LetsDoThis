@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -64,5 +65,14 @@ public class User {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
+
+    @PrePersist
+    protected void onCreate() { 
+        createdAt = new Date();
+    }
+
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 
 }
